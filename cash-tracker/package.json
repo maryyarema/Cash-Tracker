@@ -1,0 +1,68 @@
+{
+  "name": "koa-skeleton",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "private": true,
+  "author": "taras",
+  "engines": {
+    "node": "v20.5.0",
+    "npm": "9.8.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "scripts": {
+    "dev": "npx nodemon",
+    "build": "rimraf dist && npx tsc",
+    "start": "npm run build && node dist/index.js",
+    "eslint-check": "node_modules/eslint/bin/eslint.js src/controllers/**",
+    "lint": "npx eslint src",
+    "format": "npx eslint src --fix",
+    "migrations:run": "npx sequelize-cli db:migrate",
+    "migrations:create": "npx sequelize-cli migration:generate --name $name"
+  },
+  "devDependencies": {
+    "@types/bunyan": "^1.8.8",
+    "@types/bunyan-prettystream": "^0.1.32",
+    "@types/config": "^3.3.4",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/koa": "^2.13.5",
+    "@types/koa__cors": "^3.3.0",
+    "@types/koa-json": "^2.0.20",
+    "@types/koa-logger": "^3.1.2",
+    "@types/koa-router": "^7.4.4",
+    "@types/node": "^18.11.18",
+    "@types/sequelize": "^4.28.20",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "eslint": "^8.32.0",
+    "husky": "^8.0.3",
+    "nodemon": "^3.1.0",
+    "rimraf": "^4.1.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@koa/cors": "^5.0.0",
+    "bunyan": "^1.8.15",
+    "bunyan-prettystream": "^0.1.3",
+    "config": "^3.3.9",
+    "dotenv": "^16.0.3",
+    "jsonwebtoken": "^9.0.2",
+    "koa": "^2.14.1",
+    "koa-body": "^6.0.1",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^12.0.0",
+    "pg": "^8.10.0",
+    "sequelize": "^6.31.1",
+    "sequelize-cli": "^6.6.0",
+    "ajv": "^8.12.0",
+    "ajv-errors": "^3.0.0",
+    "ajv-formats": "^2.1.1",
+    "ajv-keywords": "^5.1.0"
+  }
+}

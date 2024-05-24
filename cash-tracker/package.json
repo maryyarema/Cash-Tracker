@@ -1,13 +1,13 @@
 {
-  "name": "koa-skeleton",
+  "name": "cash-tacker",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "private": true,
-  "author": "taras",
+  "author": "mariia",
   "engines": {
-    "node": "v20.5.0",
-    "npm": "9.8.0"
+    "node": "v18.15.0",
+    "npm": "9.5.0"
   },
   "husky": {
     "hooks": {

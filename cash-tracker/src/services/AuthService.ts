@@ -1,6 +1,12 @@
 import logger from "../utils/logger";
 import { User } from "../models/User";
-import { LoginRequest, LoginResponse, SignupRequest, SignupResponse, TokenValidityCheck } from "../types/Auth";
+import {
+  LoginRequest,
+  LoginResponse,
+  SignupRequest,
+  SignupResponse,
+  TokenValidityCheck,
+} from "../types/Auth";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { ServiceResponse } from "../types/common";
 import {
@@ -23,7 +29,7 @@ export default class AuthService {
     return token;
   }
 
-  public static verifyJwtToken(token: string): JwtPayload | null{
+  public static verifyJwtToken(token: string): JwtPayload | null {
     const secret = String(process.env.JWT_SECRET);
 
     try {
@@ -46,7 +52,9 @@ export default class AuthService {
     return cacheStorageToken === iat;
   }
 
-  public static async signup(data: SignupRequest): Promise<ServiceResponse<SignupResponse>> {
+  public static async signup(
+    data: SignupRequest
+  ): Promise<ServiceResponse<SignupResponse>> {
     try {
       const { name, email, password } = data;
 
@@ -64,10 +72,10 @@ export default class AuthService {
       const { salt, passwordHash } =
         UserService.generateSaltAndPasswordHash(password);
 
-      const user = await User.create({
+      const user = await UserService.create({
         name,
-        salt,
         email,
+        salt,
         passwordHash,
       });
 
@@ -134,10 +142,10 @@ export default class AuthService {
 
   public static logout(id: string): ServiceResponse<null> {
     try {
-      userTokenMap.delete(id)
+      userTokenMap.delete(id);
 
       return {
-        data: null
+        data: null,
       };
     } catch (error) {
       logger.error("Error while logging out", error);

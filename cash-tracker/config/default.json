@@ -2,8 +2,11 @@
   "CRYPT_ITERATIONS": 5000,
   "KEY_LENGTH": 128,
   "DIGEST": "sha1",
-  "INCOME_EXPENSE_TYPES": {
-    "CASH": "cash",
-    "CARD": "card"
+  "INCOMES_AND_EXPENSES": {
+    "SYSTEM_NAME": "Інше",
+    "TYPES": {
+      "CASH": "cash",
+      "CARD": "card"
+    }
   }
 }

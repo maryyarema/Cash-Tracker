@@ -39,6 +39,9 @@ User.init(
       field: "email",
       allowNull: false,
       type: DataTypes.STRING,
+      set(value: string) {
+        this.setDataValue("email", value.toLowerCase());
+      },
       validate: {
         isEmail: {
           msg: "Must be a valid email",

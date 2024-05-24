@@ -1,9 +1,9 @@
 import { ServiceError } from "../types/common";
 
-export function ForbiddenError(message: string): { error: ServiceError } {
+export function BadRequestError(message: string): { error: ServiceError } {
   return {
     error: {
-      code    : 403,
+      code    : 400,
       message : message,
     },
   };

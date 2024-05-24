@@ -2,7 +2,8 @@ import Router from "koa-router";
 import ExpenseController from "../controllers/ExpenseController";
 import validator from "../middlewares/validator";
 import authentication from "../middlewares/authentication";
-import { create } from "../schemas/expense";
+import { create, update } from "../schemas/expense";
+import { validateUUIDPathParameter } from "../schemas/common";
 
 export default class ExpenseRouter {
   public static init = (router: Router): Router => {
@@ -13,9 +14,21 @@ export default class ExpenseRouter {
     );
     router.post(
       "/expenses",
-      validator(create),
       authentication,
+      validator(create),
       ExpenseController.create
+    );
+    router.put(
+      "/expenses/:id",
+      authentication,
+      validator(update),
+      ExpenseController.update
+    );
+    router.delete(
+      "/expenses/:id",
+      authentication,
+      validator(validateUUIDPathParameter),
+      ExpenseController.delete
     );
     return router;
   };

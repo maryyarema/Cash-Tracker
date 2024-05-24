@@ -1,12 +1,15 @@
-import { Model, Optional, DataTypes } from "sequelize";
+import { Model, Optional, DataTypes, Association } from "sequelize";
 import sequelize from "../utils/sequelize";
 import config from "config";
+import { IncomeCategory } from "./IncomeCategory";
 
-const { CASH, CARD }: Record<string, string> = config.get("INCOME_EXPENSE_TYPES")
+const { CASH, CARD }: Record<string, string> = config.get(
+  "INCOMES_AND_EXPENSES.TYPES"
+);
 
 type IncomeType = "cash" | "card";
 
-interface IncomeAttributes {
+export interface IncomeAttributes {
   id: string;
   date: Date;
   userId: string;
@@ -34,6 +37,10 @@ export class Income
   public description: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  public static associations: {
+    category: Association<Income, IncomeCategory>;
+  };
 }
 
 Income.init(
@@ -78,7 +85,7 @@ Income.init(
       get() {
         const value = this.getDataValue("amount");
         return Number(value);
-      }
+      },
     },
     type: {
       field: "type",

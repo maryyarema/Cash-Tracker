@@ -18,7 +18,7 @@ export default function validator(schema: any) {
   const validate: any = ajv.compile(schema);
 
   return async (ctx: Context, next: Next) => {
-    if (!(ctx.request.body instanceof Object)) {
+    if (ctx.request.body && !(ctx.request.body instanceof Object)) {
       logger.error("Input request body must be an object");
       return ctx.throw("Input request body must be an object", 422);
     }

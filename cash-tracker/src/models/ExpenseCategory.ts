@@ -1,5 +1,6 @@
-import { Model, Optional, DataTypes } from "sequelize";
+import { Model, Optional, DataTypes, Association } from "sequelize";
 import sequelize from "../utils/sequelize";
+import { Expense } from "./Expense";
 
 interface ExpenseCategoryAttributes {
   id: string;
@@ -21,6 +22,10 @@ export class ExpenseCategory
   public userId: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  public static associations: {
+    incomes: Association<ExpenseCategory, Expense>;
+  };
 }
 
 ExpenseCategory.init(

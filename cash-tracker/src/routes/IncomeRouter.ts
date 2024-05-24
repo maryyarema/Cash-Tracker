@@ -2,7 +2,8 @@ import Router from "koa-router";
 import IncomeController from "../controllers/IncomeController";
 import validator from "../middlewares/validator";
 import authentication from "../middlewares/authentication";
-import { create } from "../schemas/income";
+import { create, update } from "../schemas/income";
+import { validateUUIDPathParameter } from "../schemas/common";
 
 export default class IncomeRouter {
   public static init = (router: Router): Router => {
@@ -13,9 +14,21 @@ export default class IncomeRouter {
     );
     router.post(
       "/incomes",
-      validator(create),
       authentication,
+      validator(create),
       IncomeController.create
+    );
+    router.put(
+      "/incomes/:id",
+      authentication,
+      validator(update),
+      IncomeController.update
+    );
+    router.delete(
+      "/incomes/:id",
+      authentication,
+      validator(validateUUIDPathParameter),
+      IncomeController.delete
     );
     return router;
   };
